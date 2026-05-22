@@ -1,23 +1,692 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "기아 카니발 9인승 장기렌트카 및 자동차리스",
+      "image": "https://www.kia.com/content/dam/kwpc/kr/ko/assets/images/360-vr/grand-carnival/exterior/swp/01.png",
+      "description": "2026년형 카니발 9인승 하이브리드, 디젤, 가솔린 모델의 엔진별 유지비 비교 및 개인/법인 사업자 리스, 장기렌트 가격 견적 분석 정보를 제공합니다.",
+      "brand": {
+        "@type": "Brand",
+        "name": "기아 (KIA)"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "450000",
+        "highPrice": "950000",
+        "offerCount": "150"
+      }
+    }
+    </script>
+
+    <style>
+      /* 변수 정의 및 부드러운 현대식 테마 색상 설정 */
+      :root {
+        --primary-color: #1e3a8a;
+        --secondary-color: #0d9488;
+        --accent-color: #f59e0b;
+        --bg-light: #f8fafc;
+        --bg-card: #ffffff;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --border-color: #e2e8f0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        line-height: 1.7;
+        color: var(--text-dark);
+        background-color: var(--bg-light);
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+
+      a:hover, a:focus {
+        color: var(--secondary-color);
+        text-decoration: underline;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: #ffffff;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        letter-spacing: -0.05em;
+      }
+
+      nav {
+        margin-top: 15px;
+      }
+
+      nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      nav ul li a {
+        color: #e2e8f0;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        background-color: #ffffff;
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      main {
+        max-width: 1140px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .content-wrapper {
+        background-color: var(--bg-card);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        padding: 40px;
+        margin-bottom: 40px;
+      }
+
+      section {
+        margin-bottom: 50px;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 40px;
+      }
+
+      section:last-of-type {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-left: 12px;
+        border-left: 5px solid var(--secondary-color);
+      }
+
+      h3 {
+        color: var(--text-dark);
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-top: 25px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 1.05rem;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        text-align: justify;
+      }
+
+      p strong {
+        color: var(--primary-color);
+      }
+
+      /* 표 스타일 */
+      .table-container {
+        width: 100%;
+        overflow-x: auto;
+        margin: 25px 0;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.95rem;
+      }
+
+      th {
+        background-color: #f1f5f9;
+        color: var(--primary-color);
+        font-weight: 600;
+        padding: 14px 16px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-dark);
+      }
+
+      tr:hover {
+        background-color: #f8fafc;
+      }
+
+      /* 실시간 계산기 위젯 */
+      .calculator-box {
+        background-color: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-radius: 12px;
+        padding: 30px;
+        margin: 30px 0;
+      }
+
+      .calculator-box h3 {
+        margin-top: 0;
+        color: #166534;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #166534;
+        margin-bottom: 8px;
+      }
+
+      .form-group select, .form-group input {
+        padding: 10px 12px;
+        border: 1px solid #86efac;
+        border-radius: 6px;
+        background-color: #ffffff;
+        font-size: 1rem;
+        outline: none;
+      }
+
+      .form-group select:focus, .form-group input:focus {
+        border-color: #15803d;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+      }
+
+      .calc-btn {
+        background-color: #15803d;
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.2s ease;
+      }
+
+      .calc-btn:hover {
+        background-color: #166534;
+      }
+
+      .calc-result {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        border: 1px solid #86efac;
+        display: none;
+      }
+
+      .result-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #166534;
+        margin-bottom: 10px;
+      }
+
+      .result-value {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      /* 키워드 태그 리스트 */
+      .keyword-section {
+        background-color: #f1f5f9;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 30px 0;
+      }
+
+      .keyword-section h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
+
+      .keywords-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .keywords-list span {
+        background-color: #ffffff;
+        color: var(--text-dark);
+        border: 1px solid var(--border-color);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      /* 외부 링크 스타일 */
+      .external-links {
+        background-color: #eff6ff;
+        border-left: 4px solid var(--primary-color);
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .external-links h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        margin-bottom: 12px;
+      }
+
+      .external-links ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .external-links li {
+        margin-bottom: 8px;
+      }
+
+      .external-links li a {
+        font-weight: 600;
+        text-decoration: underline;
+      }
+
+      footer {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: var(--primary-color);
+        color: #ffffff;
+        font-size: 0.95rem;
+        margin-top: 60px;
+        border-top: 4px solid var(--secondary-color);
+      }
+
+      footer p {
+        text-align: center;
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+      }
+
+      /* 반응형 최적화 */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.6rem;
+        }
+        .content-wrapper {
+          padding: 20px;
+        }
+        h2 {
+          font-size: 1.4rem;
+        }
+        h3 {
+          font-size: 1.2rem;
+        }
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>카니발 9인승 유지비 및 자동차리스 장기렌트카 비교 분석</h1>
+        <nav aria-label="메인 메뉴">
+            <ul>
+                <li><a href="#intro">차량 분석 소개</a></li>
+                <li><a href="#calculator">유지비 시뮬레이터</a></li>
+                <li><a href="#maintenance">유지비 상세 데이터</a></li>
+                <li><a href="#comparison">리스 vs 장기렌트</a></li>
+                <li><a href="#tax-benefits">사업자 세제 혜택</a></li>
+                <li><a href="#buying-tips">최저가 가이드</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <div class="content-wrapper">
+            
+            <!-- 섹션 1: 도입부 -->
+            <section id="intro">
+                <h2>카니발 9인승 모델 분석 및 선택의 중요성</h2>
+                <p>대한민국 패밀리카의 대명사이자 비즈니스 다목적 차량의 기준이 되는 기아자동차의 카니발은 넓은 실내 공간과 뛰어난 범용성으로 오랜 기간 사랑을 받아왔습니다. 특히 <strong>카니발 9인승</strong> 모델은 버스전용차로 진입 조건 충족(6인 이상 탑승 시), 개별소비세 면제, 개인사업자 및 법인사업자 부가가치세 환급 등 제도적인 이점이 강력하여 패밀리카뿐만 아니라 업무용 차량으로도 독보적인 위치를 차지하고 있습니다.</p>
+                <p>2026년형 모델 기준으로 엔진 라인업은 카니발 1.6 터보 하이브리드, 카니발 2.2 디젤, 그리고 카니발 3.5 가솔린 세 가지로 세분화되어 운영되고 있습니다. 각 엔진 트림에 따라 카니발 프레스티지, 노블레스, 시그니처, 그래비티까지 다양한 등급이 존재하여 소비자의 예산과 기호에 맞춰 세밀한 선택이 가능합니다. 차량을 구매하는 방식 또한 일시불이나 할부 외에 초기 비용 부담을 최소화하고 자산 세무 처리를 단순화할 수 있는 자동차리스와 장기렌트카의 수요가 폭발적으로 증가하는 추세입니다.</p>
+                <p>차량을 운용하면서 발생하는 월간 혹은 연간 지출액을 합산한 <strong>유지비</strong>는 단순 차량 가격 못지않게 중요한 선택 기준입니다. 연간 주행 거리, 자동차세 계산 방식, 연비 차이, 보험료 요율 등에 따라 최종 소비 금액에 큰 편차가 발생하기 때문입니다. 본 가이드에서는 2026년 최신 제원을 기반으로 세 가지 파워트레인의 유지비를 상세 비교하고, 리스와 장기렌트 중 어떤 상품이 개개인의 재정 상황과 목적에 부합하는지 전문적으로 분석해 드립니다.</p>
+            </section>
+
+            <!-- 섹션 2: 인터랙티브 유지비 계산기 (체류시간 증대 요인) -->
+            <section id="calculator">
+                <h2>실시간 맞춤형 유지비 시뮬레이터</h2>
+                <p>선호하는 트림과 엔진 유형, 계약 조건 및 연간 예상 주행거리를 입력하시면 월별 예상 지출 금액 및 대략적인 견적 결과를 직접 시뮬레이션해 보실 수 있습니다. 입력란에 값을 변경하며 분석 결과를 확인해 보세요.</p>
+                
+                <div class="calculator-box">
+                    <h3>카니발 9인승 월간 비용 계산기</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="engine-type">엔진 및 파워트레인 선택</label>
+                            <select id="engine-type" onchange="calculateCost()">
+                                <option value="hybrid">1.6 터보 하이브리드 (연비 약 13.5km/l)</option>
+                                <option value="diesel">2.2 디젤 (연비 약 12.5km/l)</option>
+                                <option value="gasoline">3.5 가솔린 (연비 약 9.0km/l)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trim-level">트림 및 등급 선택</label>
+                            <select id="trim-level" onchange="calculateCost()">
+                                <option value="prestige">프레스티지 (차량가 약 3,470만 원)</option>
+                                <option value="noblesse">노블레스 (차량가 약 3,910만 원)</option>
+                                <option value="signature">시그니처 (차량가 약 4,240만 원)</option>
+                                <option value="gravity">그래비티 (차량가 약 4,400만 원)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="annual-distance">연간 예상 주행거리 (km)</label>
+                            <input type="number" id="annual-distance" value="15000" step="1000" oninput="calculateCost()">
+                        </div>
+                        <div class="form-group">
+                            <label for="contract-term">운용 방식 및 기간</label>
+                            <select id="contract-term" onchange="calculateCost()">
+                                <option value="rent-48">장기렌트 - 48개월 계약</option>
+                                <option value="rent-60">장기렌트 - 60개월 계약</option>
+                                <option value="lease-48">자동차리스 - 48개월 계약</option>
+                                <option value="lease-60">자동차리스 - 60개월 계약</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="calc-btn" onclick="triggerCalculation()">모의 견적 산출하기</button>
+                    
+                    <div class="calc-result" id="calc-result">
+                        <div class="result-title">입력 조건 기반 예상 견적서 요약</div>
+                        <p>선택하신 조건에 따른 대략적인 월 지불 금액은 다음과 같이 예상됩니다.</p>
+                        <div class="result-value" id="monthly-fee-display">월 0 원</div>
+                        <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+                            본 시뮬레이션 금액은 평균적인 할인 혜택 및 금리를 가정한 예상 수치이며, 금융사별 프로모션 및 신용 등급에 따라 실제 납입 금액과 차이가 있을 수 있습니다. 상세 상담 및 정밀 비교 견적은 전문 업체를 통해 확인하시는 것을 추천합니다.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 파워트레인별 정밀 분석 -->
+            <section id="maintenance">
+                <h2>엔진 사양별 연간 유지비 상세 분석 (2026년 기준)</h2>
+                <p>차량 선택 시 비용의 핵심을 이루는 유류비와 자동차세는 파워트레인별로 판이한 차이를 나타냅니다. 2026년 연간 주행 거리 15,000km를 가정하여 산출한 표준 유지비 지표를 아래 표에서 자세히 확인해보세요.</p>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>구분 항목</th>
+                                <th>1.6 터보 하이브리드 (HEV)</th>
+                                <th>2.2 디젤 (Diesel)</th>
+                                <th>3.5 가솔린 (Gasoline)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>엔진 배기량</td>
+                                <td>1,598 cc</td>
+                                <td>2,151 cc</td>
+                                <td>3,470 cc</td>
+                            </tr>
+                            <tr>
+                                <td>복합 연비</td>
+                                <td>공인 13.5 km/l</td>
+                                <td>공인 12.5 km/l</td>
+                                <td>공인 9.0 km/l</td>
+                            </tr>
+                            <tr>
+                                <td>연간 유류비 (15,000km 기준)</td>
+                                <td>약 1,770,000 원</td>
+                                <td>약 1,800,000 원</td>
+                                <td>약 2,660,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>연간 자동차세 (지방세 포함)</td>
+                                <td>약 290,000 원</td>
+                                <td>약 560,000 원</td>
+                                <td>약 900,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>연간 합산 직접 유지비</td>
+                                <td>약 2,060,000 원</td>
+                                <td>약 2,360,000 원</td>
+                                <td>약 3,560,000 원</td>
+                            </tr>
+                            <tr>
+                                <td>유지비 측면 장단점</td>
+                                <td>자동차세 및 도심 연비 우수</td>
+                                <td>고속 주행 유류비 안정성</td>
+                                <td>정숙한 승차감 및 진동 억제</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>상세 유지비 산출 근거 및 주행 환경별 추천</h3>
+                <p>연비 계산은 2026년 국내 평균 유가(가솔린 리터당 1,600원, 디젤 리터당 1,500원)를 기준으로 하였으며 주행 습관에 따라 실연비 차이가 발생할 수 있습니다. <strong>카니발 1.6 터보 하이브리드</strong>는 도심 주행 비율이 높고 매년 납부하는 세금을 줄이고자 하는 운전자에게 적절하며, 정숙성과 안락함이 최우선이라면 초기 차량가는 다소 저렴하지만 자동차세와 주유 금액 부담이 큰 <strong>카니발 3.5 가솔린</strong> 모델이 경쟁력을 갖습니다. 고속도로를 이용한 장거리 출장이 잦다면 우수한 토크감과 고속 정속 주행 연비가 좋은 <strong>카니발 2.2 디젤</strong>이 타당한 대안이 됩니다.</p>
+            </section>
+
+            <!-- 섹션 4: 리스 vs 장기렌트 심층 비교 -->
+            <section id="comparison">
+                <h2>자동차리스 vs 장기렌트카 핵심 차이점 분석</h2>
+                <p>일시불 구매 외에 장기적인 차량 활용 대안으로 꼽히는 리스와 장기렌트는 번호판 규정, 보험 적용 주체, 그리고 부가적인 신용 평가 한도 등에서 명확한 차이점을 보입니다. 각 운전자의 환경에 따라 유리한 방식이 상이하므로 아래 비교표를 면밀히 검토하시는 것이 권장됩니다.</p>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>비교 항목</th>
+                                <th>자동차리스 (Lease)</th>
+                                <th>장기렌트카 (Long-term Rent)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>차량 번호판 구분</td>
+                                <td>일반 승용 번호판 (하, 허, 호 제한 없음)</td>
+                                <td>영업용 번호판 전용 (하, 허, 호 사용)</td>
+                            </tr>
+                            <tr>
+                                <td>자동차 보험 명의</td>
+                                <td>이용자 개인 보험 경력 유지 및 적용</td>
+                                <td>렌트회사 명의 종합보험 일괄 적용</td>
+                            </tr>
+                            <tr>
+                                <td>신용 점수 영향도</td>
+                                <td>금융 부채로 분류되어 한도 영향 가능성 있음</td>
+                                <td>단순 임대차 계약으로 부채 미인식</td>
+                            </tr>
+                            <tr>
+                                <td>사고 발생 시 패널티</td>
+                                <td>개인 보험료 할증 적용 가능</td>
+                                <td>면책금 제도 활용으로 개인 할증 없음</td>
+                            </tr>
+                            <tr>
+                                <td>월 이용료 포함 항목</td>
+                                <td>기본 차량가 (보험료, 자동차세 별도 설정 가능)</td>
+                                <td>차량가, 세금, 보험료 전체 일괄 포함</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>자동차리스 장단점과 권장 대상</h3>
+                <p>리스의 가장 명확한 <strong>장점</strong>은 하, 허, 호 등의 렌트카 전용 번호판이 아닌 일반 승용차 번호판을 부착하여 외관상 품위를 유지할 수 있다는 점입니다. 또한, 무사고 경력이 오래되어 개인 보험 요율이 낮게 책정되는 숙련된 운전자라면 리스료 외에 개인 보험을 결합하는 방식이 월 납입 비용을 더욱 효율적으로 관리하는 지름길이 될 수 있습니다. 반면, 리스는 금융 상품으로 등재되기 때문에 신용대출 한도나 신용평가 점수에 간접적인 영향을 미칠 수 있다는 <strong>단점</strong>이 공존하므로 자산 관리에 세심한 관찰이 요구됩니다.</p>
+
+                <h3>장기렌트카 장단점과 권장 대상</h3>
+                <p>장기렌트카는 매월 납부하는 렌트료 안에 자동차세와 보험료가 완전히 포함되어 있어 자금 관리가 극히 직관적이라는 것이 큰 장점입니다. 특히 주행 거리가 많아 사고 위험율이 상대적으로 높거나, 운전 경력이 짧아 개인 보험 요율이 비싼 신규 가입자에게 적합합니다. 사고가 반복해서 발생하더라도 계약 시 설정된 소액의 면책금만 지불하면 면책 처리가 이루어지며, 개인 보험료 할증이 전혀 없기 때문입니다. 다만 허, 하, 호 번호판 사용에 대한 거부감이 있는 경우에는 선택이 망설여질 수 있습니다.</p>
+            </section>
+
+            <!-- 섹션 5: 사업자 혜택 정보 -->
+            <section id="tax-benefits">
+                <h2>개인 및 법인사업자 카니발 9인승 세제 혜택 총정리</h2>
+                <p>세무적인 관점에서 카니발 9인승은 일반 7인승 SUV나 세단과는 완전히 차별화된 세법적 지위를 가집니다. 부가가치세법상 매입세액 공제가 가능한 승합차로 분류되기 때문입니다.</p>
+                <p>개인사업자 또는 법인사업자가 카니발 9인승을 장기렌트나 리스로 이용하게 되면 다음과 같은 세무적 혜택을 온전히 누릴 수 있습니다.</p>
+                <p>첫째, <strong>부가가치세 환급</strong> 혜택입니다. 차량 가격 및 매월 청구되는 렌트료의 10%에 해당하는 부가세를 환급받거나 공제받을 수 있어 실질적인 도입 단가가 큰 폭으로 내려갑니다. 이는 일반 승용차량 리스에서는 불가능하며 9인승 이상의 승합차 및 경차에만 허용되는 세법상 특례입니다.</p>
+                <p>둘째, <strong>경비 처리 용이성</strong>입니다. 연간 차량 관련 비용(임차료, 유류비, 통행료 등)을 연간 최대 1,500만 원 한도 내에서 간편하게 필요경비로 산입하여 종합소득세나 법인세 부담을 경감할 수 있습니다. 특히 9인승 승합차는 임직원 전용 자동차보험에 강제로 가입하지 않더라도 세무서 증빙을 거쳐 경비 인정을 받을 수 있어 기업 운용 부담이 줄어듭니다.</p>
+            </section>
+
+            <!-- 섹션 6: 최저가 견적 확보 팁 -->
+            <section id="buying-tips">
+                <h2>저렴한곳 찾는 법 및 신뢰성 있는 비교 가이드</h2>
+                <p>리스와 장기렌트 시장은 다수의 파이낸셜사 및 렌트 전문 업체들이 치열하게 경쟁하고 있는 구조입니다. 따라서 소비자가 조금만 주의 깊게 비교해 본다면 상당한 금액의 할인을 이끌어낼 수 있습니다. 현명하게 계약을 마무리지을 수 있는 실질적인 요령들을 소개합니다.</p>
+                <p>가장 효율적인 방식은 다수의 금융사 조건을 일괄적으로 조회해 주는 <strong>비교 전문 플랫폼</strong>을 활용하는 것입니다. 금융사들은 분기마다, 혹은 월마다 특정 차종에 대해 특별 프로모션을 진행하곤 하는데, 카니발 9인승 하이브리드 노블레스나 카니발 1.6 터보 하이브리드 그래비티 등 인기 사양에 대한 특판 물량을 신속히 파악하는 것이 중요합니다. 시기만 잘 맞춘다면 무보증 조건에서도 매우 저렴한 월 납입금을 제시하는 특판 혜택을 적용받을 수 있습니다.</p>
+                <p>또한 포털 사이트 검색뿐만 아니라 네이버 카페, 다음 카페, 내돈내산 출고 후기 등을 꼼꼼하게 검색하는 노력이 요구됩니다. 단순한 가격 비교를 넘어 실제 가입 혜택으로 현금지원이나 상품권 제공, 블랙박스와 썬팅 등의 사은품이 동급 사양으로 지원되는지 면밀히 살펴보아야 합니다. 간혹 과도한 지원금을 미끼로 고금리 리스 계약을 유도하는 불량 업체의 사례가 유튜브나 블로그 등의 채널을 통해 고발되기도 하니 주의해야 합니다.</p>
+                <p>최근에는 인공지능 기술의 발전으로 챗지피티(ChatGPT), 제미나이(Gemini) 등 고도화된 AI 어시스턴트 서비스를 통해 차량 스펙을 미리 점검하고 가상 시뮬레이션을 돌려보는 스마트한 소비자가 늘고 있습니다. 다각도의 디지털 채널을 동원해 신뢰할 수 있는 정보를 확보하고 정식 등록된 전문 설계사를 통해 최종적인 대조 견적을 수령하는 절차를 권장합니다.</p>
+            </section>
+
+            <!-- 섹션 7: 키워드 클러스터 (자동완성, 연관, 많이 찾는 키워드 통합) -->
+            <section class="keyword-section">
+                <h3>소비자들이 많이 찾는 연관 검색어 클러스터</h3>
+                <p>아래 목록은 검색 데이터 분석을 통해 도출된 핵심 키워드군입니다. 본 페이지는 이러한 사용자 관심사를 종합적으로 충족할 수 있도록 정밀 구성되었습니다.</p>
+                
+                <div class="keywords-list">
+                    <span>카니발 9인승 유지비 평균</span>
+                    <span>장기렌트카 가격비교 싼곳</span>
+                    <span>자동차리스 신용 영향</span>
+                    <span>카니발 하이브리드 단점</span>
+                    <span>법인사업자 부가세 환급 승합차</span>
+                    <span>더 뉴 카니발 시그니처 9인승 견적</span>
+                    <span>카니발 디젤 소음 후기</span>
+                    <span>장기렌트 사은품 현금지원 규모</span>
+                    <span>카니발 리무진 리스 예상 납입금</span>
+                    <span>카니발 1.6T HEV 노블레스 사양</span>
+                    <span>개인사업자 업무용 승용차 경비처리</span>
+                    <span>카니발 리스 승계 및 반납 비용</span>
+                </div>
+            </section>
+
+            <!-- 섹션 8: 공인된 신뢰성 있는 외부 출처 안내 -->
+            <section class="external-links">
+                <h3>공식 유관 기관 및 신뢰할 수 있는 정보원</h3>
+                <p>차량 선택과 관련 세법 기준에 대해 더욱 공신력 있는 상세한 가이드라인은 아래 공식 기관의 홈페이지를 통해 추가로 확인하실 수 있습니다.</p>
+                <ul>
+                    <li><a href="https://www.kia.com" target="_blank" rel="noopener">기아 주식회사 공식 홈페이지 - 카니발 상세 견적 및 카탈로그</a></li>
+                    <li><a href="https://www.nts.go.kr" target="_blank" rel="noopener">국세청 - 사업자 업무용 차량 비용처리 및 부가세 환급 요건</a></li>
+                    <li><a href="https://www.molit.go.kr" target="_blank" rel="noopener">국토교통부 - 자동차 등록 대수 및 차종 분류 기준 규정</a></li>
+                    <li><a href="https://www.koroad.or.kr" target="_blank" rel="noopener">도로교통공단 - 고속도로 버스전용차로 탑승 제한 및 벌칙 안내</a></li>
+                    <li><a href="https://namu.wiki/w/%EA%B8%B0%EC%95%84%20%EC%B9%B4%EB%8B%88%EB%B0%9C" target="_blank" rel="noopener">나무위키 - 기아 카니발 세대별 변천사 및 상세 스펙 가이드</a></li>
+                </ul>
+            </section>
+
+        </div>
     </main>
-  </body>
-</html>
+
+    <!-- 자바스크립트를 통한 인터랙티브 계산 기능 구현 -->
+    <script>
+        function triggerCalculation() {
+            var resultBox = document.getElementById("calc-result");
+            resultBox.style.display = "block";
+            calculateCost();
+        }
+
+        function calculateCost() {
+            var engine = document.getElementById("engine-type").value;
+            var trim = document.getElementById("trim-level").value;
+            var distanceInput = document.getElementById("annual-distance").value;
+            var term = document.getElementById("contract-term").value;
+
+            var distance = parseInt(distanceInput);
+            if (isNaN(distance) || distance < 0) {
+                distance = 15000;
+            }
+
+            // 기준 차량가격 기본값 세팅
+            var baseCarPrice = 34700000;
+            if (trim === "noblesse") {
+                baseCarPrice = 39100000;
+            } else if (trim === "signature") {
+                baseCarPrice = 42400000;
+            } else if (trim === "gravity") {
+                baseCarPrice = 44000000;
+            }
+
+            // 파워트레인별 가산금
+            var engineAdd = 0;
+            var fuelCostPerKm = 118; // 하이브리드 기준 km당 주유비 가정
+            if (engine === "diesel") {
+                engineAdd = 1900000;
+                fuelCostPerKm = 120;
+            } else if (engine === "hybrid") {
+                engineAdd = 4500000;
+                fuelCostPerKm = 118;
+            } else if (engine === "gasoline") {
+                engineAdd = 0;
+                fuelCostPerKm = 177;
+            }
+
+            var totalPrice = baseCarPrice + engineAdd;
+
+            // 월 기본 렌트/리스료 계산 (기간별 감가 고려한 간이 공식)
+            var termFactor = 48;
+            if (term.indexOf("60") !== -1) {
+                termFactor = 60;
+            }
+
+            var baseMonthlyFee = totalPrice / (termFactor * 1.4);
+
+            // 주행 거리에 따른 유류비 가산
+            var monthlyFuel = (distance * fuelCostPerKm) / 12;
+
+            // 장기렌트와 리스 가중치 조정
+            var totalMonthlyOutlay = baseMonthlyFee;
+            if (term.indexOf("rent") !== -1) {
+                // 장기렌트는 세금/보험이 포함되므로 리스 대비 가중치 부여
+                totalMonthlyOutlay = totalMonthlyOutlay * 1.12;
+            } else {
+                // 리스는 리스료만 산출 (보험 세금 개별 처리 반영)
+                totalMonthlyOutlay = totalMonthlyOutlay * 0.95;
+            }
+
+            // 최종 포맷팅
+            var finalValue = Math.round(totalMonthlyOutlay);
+            var formattedValue = finalValue.toLocaleString() + " 원";
+
+            document.getElementById("monthly-fee-display").innerText = "월 약 " + formattedValue;
+        }
+    </script>
+  
